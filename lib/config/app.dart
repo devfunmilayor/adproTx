@@ -2,7 +2,9 @@ import 'package:adpro/config/core/di/injector.dart';
 import 'package:adpro/config/core/di/providers.dart';
 import 'package:adpro/config/core/resources/size_c.dart';
 import 'package:adpro/config/core/resources/theme_config.dart';
-import 'package:adpro/config/core/route/r_route.gr.dart';
+import 'package:adpro/config/core/route/nav_keys.dart';
+import 'package:adpro/config/core/route/r_route.dart';
+import 'package:adpro/config/core/route/route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -17,7 +19,7 @@ class AdProApp extends StatefulWidget {
 }
 
 class _AdProAppState extends State<AdProApp> {
-  final approute = si<AdproofRouter>();
+  final approute = si<AdProof>();
   @override
   void initState() {
     super.initState();
@@ -38,7 +40,10 @@ class _AdProAppState extends State<AdProApp> {
             builder: (context, child) {
               return LayoutBuilder(builder: (context, constraints) {
                 SizeConfig().init(constraints);
-                return MaterialApp.router(
+                return MaterialApp(
+                  onGenerateRoute: AdProof.generateRoute,
+                  navigatorKey: si<NavigationService>().navigatorKey,
+                  initialRoute: AdPro.SPLASH_ROUTE,
                   debugShowCheckedModeBanner: false,
                   theme: getApplicationTheme(),
                   title: 'Adproof',
@@ -61,8 +66,6 @@ class _AdProAppState extends State<AdProApp> {
                       ],
                     );
                   },
-                  routeInformationParser: approute.defaultRouteParser(),
-                  routerDelegate: approute.delegate(),
                 );
               });
             }),

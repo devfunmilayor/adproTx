@@ -15,6 +15,47 @@ class $AssetsFontsGen {
 
 class $AssetsImagesGen {
   const $AssetsImagesGen();
+
+  $AssetsImagesPngGen get png => const $AssetsImagesPngGen();
+  $AssetsImagesSvgGen get svg => const $AssetsImagesSvgGen();
+}
+
+class $AssetsImagesPngGen {
+  const $AssetsImagesPngGen();
+
+  /// File path: assets/images/png/adproof_logo.png
+  AssetGenImage get adproofLogo =>
+      const AssetGenImage('assets/images/png/adproof_logo.png');
+
+  /// File path: assets/images/png/clarity_image-gallery-solid.png
+  AssetGenImage get clarityImageGallerySolid =>
+      const AssetGenImage('assets/images/png/clarity_image-gallery-solid.png');
+
+  /// List of all assets
+  List<AssetGenImage> get values => [adproofLogo, clarityImageGallerySolid];
+}
+
+class $AssetsImagesSvgGen {
+  const $AssetsImagesSvgGen();
+
+  /// File path: assets/images/svg/adprof_logo.svg
+  String get adprofLogo => 'assets/images/svg/adprof_logo.svg';
+
+  /// File path: assets/images/svg/applie_icon.svg
+  String get applieIcon => 'assets/images/svg/applie_icon.svg';
+
+  /// File path: assets/images/svg/email.svg
+  String get email => 'assets/images/svg/email.svg';
+
+  /// File path: assets/images/svg/google_icon.svg
+  String get googleIcon => 'assets/images/svg/google_icon.svg';
+
+  /// File path: assets/images/svg/onboarding_img.svg
+  String get onboardingImg => 'assets/images/svg/onboarding_img.svg';
+
+  /// List of all assets
+  List<String> get values =>
+      [adprofLogo, applieIcon, email, googleIcon, onboardingImg];
 }
 
 class Assets {

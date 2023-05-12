@@ -3,28 +3,49 @@ import 'package:adpro/features/auth/presentation/view/auth/auth_view.dart';
 import 'package:adpro/features/auth/presentation/view/auth/signin.dart';
 import 'package:adpro/features/auth/presentation/view/onboarding/onboarding.dart';
 import 'package:adpro/features/splash.dart';
-import 'package:auto_route/auto_route.dart';
+import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
+import 'package:universal_platform/universal_platform.dart';
 
-@CustomAutoRouter(
-    replaceInRouteName: 'Page,Route',
-    transitionsBuilder: buildTransitions,
-    durationInMilliseconds: 10,
-    routes: <CustomRoute>[
-      CustomRoute(
-        page: SplashScreen,
-        initial: true,
-      ),
-      CustomRoute(
-        page: OnboardingView,
-        path: AdPro.ONBOARDING_ROUTE,
-      ),
-      CustomRoute(
-        page: AuthMainView,
-        path: AdPro.AUTH_ROUTE,
-      ),
-      CustomRoute(
-        page: SignIn,
-        path: AdPro.SIGN_IN_ROUTE,
-      ),
-    ])
-class $AdproofRouter {}
+class AdProof {
+  static Route<dynamic> generateRoute(RouteSettings settings) {
+    switch (settings.name) {
+      case AdPro.SPLASH_ROUTE:
+        return pageRoute(settings: settings, widget: const SplashScreen());
+
+      case AdPro.ONBOARDING_ROUTE:
+        return pageRoute(settings: settings, widget: const OnboardingView());
+
+      case AdPro.AUTH_ROUTE:
+        return pageRoute(settings: settings, widget: const AuthMainView());
+
+      case AdPro.SIGN_IN_ROUTE:
+        return pageRoute(settings: settings, widget: const SignIn());
+
+      default:
+        return pageRoute(settings: settings, widget: Container());
+    }
+  }
+}
+
+PageRoute pageRoute({required RouteSettings settings, required Widget widget}) {
+  if (UniversalPlatform.isAndroid) {
+    return PageTransition(
+        settings: settings,
+        child: widget,
+        type: PageTransitionType.fade,
+        duration: const Duration(milliseconds: 10));
+  } else if (UniversalPlatform.isIOS) {
+    return PageTransition(
+        settings: settings,
+        child: widget,
+        type: PageTransitionType.fade,
+        duration: const Duration(milliseconds: 10));
+  } else {
+    return PageTransition(
+        settings: settings,
+        child: widget,
+        type: PageTransitionType.fade,
+        duration: const Duration(milliseconds: 10));
+  }
+}

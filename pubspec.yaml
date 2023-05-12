@@ -35,14 +35,15 @@ dependencies:
   flutter_local_notifications:
   injectable: ^1.5.0
   get_it: ^7.2.0
+  flutter_svg: 
   hive:
-  auto_route: ^5.0.4
   google_fonts: ^4.0.4
   bloc:
   dio:
   shared_preferences: ^2.1.0
   carousel_slider: ^4.2.1
   badges: ^3.1.1
+  page_transition: ^2.0.9
 
 dev_dependencies:
   flutter_test:
@@ -54,7 +55,6 @@ dev_dependencies:
   flutter_gen_runner:
   freezed:
   json_serializable:
-  auto_route_generator:
   injectable_generator: 
 
 flutter_gen:
@@ -71,6 +71,8 @@ flutter:
 
   assets:
     - assets/images/
+    - assets/images/svg/
+    - assets/images/png
     - assets/fonts/
     - .env
 
