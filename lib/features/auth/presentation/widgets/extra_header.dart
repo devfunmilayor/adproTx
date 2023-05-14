@@ -1,7 +1,6 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:adpro/config/core/extension/num.dart';
-import 'package:adpro/config/core/resources/app_string.dart';
 import 'package:adpro/config/core/resources/color_config.dart';
 import 'package:adpro/config/core/resources/textstyle_x.dart';
 import 'package:adpro/gen/assets.gen.dart';
@@ -11,8 +10,9 @@ import 'package:flutter_animate/flutter_animate.dart';
 class ExtraHeaderWid extends StatelessWidget {
   const ExtraHeaderWid({
     super.key,
+    this.label,
   });
-
+  final String? label;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -29,7 +29,7 @@ class ExtraHeaderWid extends StatelessWidget {
               ),
           20.0.h,
           Text(
-            AppString.emailStrl,
+            label ?? '',
             textAlign: TextAlign.center,
             style:
                 getMediumStyle(color: ColorManager.kPrimColorII, fontSize: 12),

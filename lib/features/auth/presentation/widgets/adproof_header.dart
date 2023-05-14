@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:adpro/config/core/di/injector.dart';
+import 'package:adpro/config/core/resources/app_string.dart';
 import 'package:adpro/config/core/resources/color_config.dart';
 import 'package:adpro/config/core/resources/font_size.dart';
 import 'package:adpro/config/core/resources/textstyle_x.dart';
@@ -16,6 +17,7 @@ class AdproofBar extends StatelessWidget implements PreferredSizeWidget {
   final Function()? onTap;
   final String? label;
   final bool cTap;
+  final bool enableBg;
   final bool showIcon;
   const AdproofBar({
     Key? key,
@@ -23,13 +25,14 @@ class AdproofBar extends StatelessWidget implements PreferredSizeWidget {
     this.label,
     this.cTap = false,
     this.showIcon = true,
+    this.enableBg = false,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      elevation: 0.1,
-      backgroundColor: ColorManager.white,
+      elevation: enableBg ? 0 : 0.1,
+      backgroundColor: enableBg ? null : ColorManager.white,
       systemOverlayStyle: const SystemUiOverlayStyle(
         statusBarIconBrightness: Brightness.dark,
         // statusBarColor: ColorManager.white,
@@ -45,14 +48,14 @@ class AdproofBar extends StatelessWidget implements PreferredSizeWidget {
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8),
                 border: Border.all(
-                  color: ColorManager.black,
-                  width: 0.5,
+                  color: enableBg ? ColorManager.white : ColorManager.black,
+                  width: enableBg ? 1 : 0.5,
                 )),
             child: showIcon
                 ? Icon(
                     CupertinoIcons.back,
                     size: 18.sp,
-                    color: ColorManager.black,
+                    color: enableBg ? ColorManager.white : ColorManager.black,
                   )
                 : const SizedBox.shrink(),
           ),
@@ -76,4 +79,47 @@ class AdproofBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+}
+
+Widget privacyWidR() {
+  return ListTile(
+    contentPadding: EdgeInsets.zero,
+    title: Text(
+      AppString.adProfPrivacy,
+      style: getBoldStyle(
+        color: ColorManager.kPrimColorII,
+        fontSize: 12.5,
+      ),
+    ),
+    subtitle: Padding(
+      padding: EdgeInsets.only(top: 18.0),
+      child: Text(
+        AppString.randI,
+        style: getRegularStyle(
+          color: ColorManager.kPrimColor,
+          fontSize: 10,
+        ),
+      ),
+    ),
+  );
+}
+
+Widget rowTxtW({String? lable}) {
+  return ListTile(
+    dense: true,
+    visualDensity: VisualDensity(horizontal: -4),
+    leading: Icon(
+      Icons.circle,
+      size: 10,
+      color: ColorManager.btnColorDefault,
+    ),
+    contentPadding: EdgeInsets.zero,
+    title: Text(
+      lable ?? '',
+      style: getRegularStyle(
+        color: ColorManager.kPrimColorII,
+        fontSize: 10,
+      ),
+    ),
+  );
 }

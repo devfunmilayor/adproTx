@@ -1,17 +1,21 @@
-import 'package:adpro/features/auth/presentation/cubit/auth_state.dart';
+import 'dart:developer';
+
+import 'package:adpro/config/core/enum/adproof_enum.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:injectable/injectable.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
+part 'auth_state.dart';
+part 'auth_cubit.freezed.dart';
+
+@lazySingleton
 class AuthCubit extends Cubit<AuthState> {
-  AuthCubit() : super(const AuthState(isLoading: true));
+  AuthCubit() : super(const AuthState.initial()) {
+    functionSwitchBtw(SignupORSignIn.signUp);
+  }
 
-  Future<void> loadInitialData() async {
-    final stableState = state;
-    try {
-      emit(state.copyWith(isLoading: true));
-      emit(state.copyWith(isLoading: false));
-    } catch (error) {
-      emit(state.copyWith(error: error.toString()));
-      emit(stableState.copyWith(isLoading: false));
-    }
+  functionSwitchBtw(SignupORSignIn signOrSignUpViaEmail) {
+    emit(state.copyWith(signupORSignIn: signOrSignUpViaEmail));
+    log('${{state.signupORSignIn}}');
   }
 }

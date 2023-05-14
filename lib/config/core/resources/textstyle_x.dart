@@ -37,13 +37,13 @@ TextStyle getLightStyle({
 }
 
 // bold text style
-TextStyle getBoldStyle({double fontSize = FontSize.s12, required Color color}) {
+TextStyle getBoldStyle(
+    {double fontSize = FontSize.s12,
+    required Color color,
+    TextDecoration? decoration}) {
   return _getTextStyle(
-    fontSize,
-    FontConstants.fontFamily,
-    FontWeightManager.bold,
-    color,
-  );
+      fontSize, FontConstants.fontFamily, FontWeightManager.bold, color,
+      decoration: decoration);
 }
 
 // semiBold style

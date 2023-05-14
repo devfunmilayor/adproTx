@@ -7,11 +7,12 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
-import 'package:shared_preferences/shared_preferences.dart' as _i5;
+import 'package:shared_preferences/shared_preferences.dart' as _i6;
 
-import '../route/nav_keys.dart' as _i4;
+import '../../../features/auth/presentation/cubit/auth_cubit.dart' as _i4;
+import '../route/nav_keys.dart' as _i5;
 import '../route/r_route.dart' as _i3;
-import 'id.dart' as _i6; // ignore_for_file: unnecessary_lambdas
+import 'id.dart' as _i7; // ignore_for_file: unnecessary_lambdas
 
 // ignore_for_file: lines_longer_than_80_chars
 /// initializes the registration of provided dependencies inside of [GetIt]
@@ -27,12 +28,13 @@ Future<_i1.GetIt> $initGetIt(
   );
   final moduleApp = _$ModuleApp();
   gh.lazySingleton<_i3.AdProof>(() => moduleApp.router);
-  gh.lazySingleton<_i4.NavigationService>(() => moduleApp.navigationService);
-  await gh.factoryAsync<_i5.SharedPreferences>(
+  gh.lazySingleton<_i4.AuthCubit>(() => _i4.AuthCubit());
+  gh.lazySingleton<_i5.NavigationService>(() => moduleApp.navigationService);
+  await gh.factoryAsync<_i6.SharedPreferences>(
     () => moduleApp.prefs,
     preResolve: true,
   );
   return get;
 }
 
-class _$ModuleApp extends _i6.ModuleApp {}
+class _$ModuleApp extends _i7.ModuleApp {}
