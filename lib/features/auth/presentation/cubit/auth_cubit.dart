@@ -1,5 +1,5 @@
+import 'package:adpro/features/auth/presentation/cubit/auth_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:adpro/features/auth/presentation/cubit/auth/auth_state.dart';
 
 class AuthCubit extends Cubit<AuthState> {
   AuthCubit() : super(const AuthState(isLoading: true));

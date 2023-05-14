@@ -34,18 +34,18 @@ PageRoute pageRoute({required RouteSettings settings, required Widget widget}) {
         settings: settings,
         child: widget,
         type: PageTransitionType.fade,
-        duration: const Duration(milliseconds: 10));
+        duration: const Duration(milliseconds: 400));
   } else if (UniversalPlatform.isIOS) {
     return PageTransition(
         settings: settings,
         child: widget,
         type: PageTransitionType.fade,
-        duration: const Duration(milliseconds: 10));
+        duration: const Duration(milliseconds: 400));
   } else {
     return PageTransition(
         settings: settings,
         child: widget,
         type: PageTransitionType.fade,
-        duration: const Duration(milliseconds: 10));
+        duration: const Duration(milliseconds: 400));
   }
 }

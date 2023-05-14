@@ -12,7 +12,6 @@ ThemeData getApplicationTheme() {
     primaryColor: ColorManager.primary,
     primaryColorLight: ColorManager.primaryOpacity70,
     primaryColorDark: ColorManager.darkPrimary,
-    backgroundColor: ColorManager.white,
     disabledColor: ColorManager.grey1,
     // ripple color
     splashColor: ColorManager.primary.withOpacity(0.3),
@@ -63,20 +62,20 @@ ThemeData getApplicationTheme() {
 
     // Text theme
     textTheme: TextTheme(
-      headline1: getSemiBoldStyle(
+      displayLarge: getSemiBoldStyle(
         color: ColorManager.darkGrey,
         fontSize: FontSize.s16,
       ),
-      subtitle1: getMediumStyle(
+      titleMedium: getMediumStyle(
         color: ColorManager.darkGrey,
         fontSize: FontSize.s14,
       ),
-      subtitle2: getMediumStyle(
+      titleSmall: getMediumStyle(
         color: ColorManager.primary,
         fontSize: FontSize.s14,
       ),
-      caption: getRegularStyle(color: ColorManager.darkGrey),
-      bodyText1: getRegularStyle(color: ColorManager.darkGrey),
+      bodySmall: getRegularStyle(color: ColorManager.darkGrey),
+      bodyLarge: getRegularStyle(color: ColorManager.darkGrey),
     ),
 
     // input decoration theme
@@ -122,6 +121,6 @@ ThemeData getApplicationTheme() {
       prefixIconColor: ColorManager.primary,
       // surfix
       suffixIconColor: ColorManager.primary,
-    ), colorScheme: ColorScheme.fromSwatch().copyWith(secondary: ColorManager.grey),
+    ), colorScheme: ColorScheme.fromSwatch().copyWith(secondary: ColorManager.grey).copyWith(background: ColorManager.white),
   );
 }

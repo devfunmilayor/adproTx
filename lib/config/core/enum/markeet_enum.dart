@@ -1,1 +1,0 @@
-enum CLOTHTAB { about, reviews }

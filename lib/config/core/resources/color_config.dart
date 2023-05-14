@@ -83,6 +83,11 @@ class ColorManager {
   static Color bottomNavColor = HexColor.fromHex('#FDFDFD');
   static Color favoriteColor = HexColor.fromHex('#E55986');
   static Color byNowBtn = HexColor.fromHex('#2A2D40');
+  static Color kPrimColor = HexColor.fromHex('#6E6484');
+  static Color kPrimColorII = HexColor.fromHex('#140033');
+  static Color kPinkColor = HexColor.fromHex('#FD22D4');
+  static Color btnColorDefault = HexColor.fromHex('#FFB026');
+  static Color filledColor = HexColor.fromHex('#F1F6FB');
 }
 
 extension HexColor on Color {

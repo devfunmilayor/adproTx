@@ -1,0 +1,1 @@
+enum SignupORSignIn { signUp, signIn }

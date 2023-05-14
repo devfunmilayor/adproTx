@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, library_private_types_in_public_api
 
 import 'package:adpro/config/core/resources/color_config.dart';
 import 'package:adpro/config/core/resources/textstyle_x.dart';
@@ -6,8 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class SearchTextField extends StatelessWidget {
-  const SearchTextField(
+class InputTextField extends StatelessWidget {
+  const InputTextField(
       {Key? key,
       required this.labelText,
       this.controller,
@@ -23,7 +23,8 @@ class SearchTextField extends StatelessWidget {
       this.initialValue,
       this.styleX,
       this.prefix,
-      this.validate})
+      this.validate,
+      this.isObscure = false})
       : super(key: key);
 
   final String labelText;
@@ -41,76 +42,95 @@ class SearchTextField extends StatelessWidget {
   final VoidCallback? onEditingComplete;
   final String? initialValue, error;
   final TextStyle? styleX;
+  final bool isObscure;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10.0),
-      child: TextFormField(
-        controller: controller,
-        initialValue: initialValue,
-        inputFormatters: inputformatters,
-        cursorColor: ColorManager.textFiledColor,
-        validator: validate,
-        keyboardType: inputType,
-        onChanged: onChanged,
-        textAlign: textAlign,
-        cursorHeight: 15,
-        cursorWidth: 1,
-        style: styleX ??
-            getRegularStyle(
-              color: ColorManager.black,
-              fontSize: 11,
-            ),
-        decoration: InputDecoration(
-          prefixIcon: prefix,
-          isDense: true,
-          suffixIcon: suffixIcon,
-          labelText: labelText,
-
-          errorText: error,
-          floatingLabelBehavior: FloatingLabelBehavior.never,
-          errorMaxLines: 1,
-          errorStyle: getRegularStyle(
-            color: Colors.red,
-            fontSize: 11.sp,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            labelText,
+            style: getMediumStyle(color: ColorManager.kPrimColor),
           ),
+          Padding(
+            padding: const EdgeInsets.only(top: 10.0),
+            child: TextFormField(
+              controller: controller,
+              obscureText: isObscure,
+              initialValue: initialValue,
+              inputFormatters: inputformatters,
+              cursorColor: ColorManager.textFiledColor,
+              validator: validate,
+              keyboardType: inputType,
+              onChanged: onChanged,
+              textAlign: textAlign,
+              cursorHeight: 15,
+              cursorWidth: 1,
+              style: styleX ??
+                  getBoldStyle(
+                    color: ColorManager.black,
+                    fontSize: 11,
+                  ),
+              decoration: InputDecoration(
+                prefixIcon: prefix,
+                isDense: true,
+                suffixIcon: suffixIcon,
+                // labelText: labelText,
 
-          filled: false,
-          fillColor: ColorManager.fundCard,
+                errorText: error,
+                floatingLabelBehavior: FloatingLabelBehavior.never,
+                errorMaxLines: 1,
+                errorStyle: getRegularStyle(
+                  color: Colors.red,
+                  fontSize: 11.sp,
+                ),
 
-          labelStyle: getRegularStyle(color: ColorManager.black, fontSize: 9),
-          // prefix: prefix,
-          hintStyle: getRegularStyle(color: ColorManager.black, fontSize: 12),
-          contentPadding: EdgeInsets.symmetric(vertical: 20, horizontal: 12),
-          // alignLabelWithHint: true,
-          errorBorder: OutlineInputBorder(
-            borderSide: BorderSide(
-              color: ColorManager.error,
-              // width: AppSize.s1_5,
-            ),
-          ),
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10.r),
-            borderSide: BorderSide(color: ColorManager.grey.withOpacity(0.15)),
-          ),
-          focusedErrorBorder: OutlineInputBorder(
-              borderSide: BorderSide(
-                color: ColorManager.error,
+                filled: true,
+                fillColor: ColorManager.filledColor,
+
+                labelStyle:
+                    getRegularStyle(color: ColorManager.black, fontSize: 9),
+                hintStyle:
+                    getBoldStyle(color: ColorManager.black, fontSize: 12),
+                contentPadding:
+                    EdgeInsets.symmetric(vertical: 20, horizontal: 12),
+                // alignLabelWithHint: true,
+                errorBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: ColorManager.error,
+                  ),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10.r),
+                  borderSide:
+                      BorderSide(color: ColorManager.grey.withOpacity(0.01)),
+                ),
+                focusedErrorBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: ColorManager.error,
+                    ),
+                    borderRadius: BorderRadius.circular(10.r)),
+                disabledBorder: OutlineInputBorder(
+                  borderSide:
+                      BorderSide(color: ColorManager.grey.withOpacity(0.1)),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10.r),
+                  borderSide:
+                      BorderSide(color: ColorManager.grey.withOpacity(0.1)),
+                ),
+                prefixIconConstraints: BoxConstraints(
+                  minWidth: 20,
+                  minHeight: 20,
+                ),
               ),
-              borderRadius: BorderRadius.circular(10.r)),
-          disabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: ColorManager.grey.withOpacity(0.15)),
+            ),
           ),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10.r),
-            borderSide: BorderSide(color: ColorManager.grey.withOpacity(0.15)),
-          ),
-          prefixIconConstraints: BoxConstraints(
-            minWidth: 20,
-            minHeight: 20,
-          ),
-        ),
+        ],
       ),
     );
   }
